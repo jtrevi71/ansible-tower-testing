@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+    - name: hostalive
+      shell: echo '++++++++++++++';date;hostname;echo '++++++++++++++';netstat -tpln
+      register: hostalive
+
+    - debug: var=hostalive.stdout_lines

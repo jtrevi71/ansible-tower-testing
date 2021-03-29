@@ -1,0 +1,17 @@
+---
+- hosts: all
+  tasks:
+    - name: hardware
+      shell: echo '++++++++++++++';date;hostname;echo '++++++++++++++';iostat -m;free -m -h | cut -c1-45;uptime
+      register: hardware
+
+    - debug: var=hardware.stdout_lines
+
+
+- hosts: all
+  tasks:
+    - name: partitions
+      shell: echo '++++++++++++++';date;hostname;echo '++++++++++++++';df -h | cut -c10-60
+      register: partitions
+
+    - debug: var=partitions.stdout_lines
