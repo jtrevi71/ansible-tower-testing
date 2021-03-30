@@ -1,0 +1,8 @@
+---
+- hosts: all
+  tasks:
+    - name: vms
+      shell: echo '---------------';date;hostname;echo '---------------';echo 'all vms ->';VBoxManage list vms;echo 'vms running ->';VBoxManage list runningvms
+      register: vms
+
+    - debug: var=vms.stdout_lines
