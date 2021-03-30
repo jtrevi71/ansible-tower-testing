@@ -2,7 +2,7 @@
 - hosts: all
   tasks:
     - name: deploy-centos-minimal
-      shell: echo '---------------';date;hostname;echo '---------------';echo 'INIT DEPLOY ->';VBoxManage import /home/trevi/VirtualBox\ VMs/OVAs/CentOS8.ova --vsys 0 --memory 1024 --cpus 2;echo '<- END DEPLOY';VBoxManage list vms
+      shell: echo '---------------';date;hostname;echo '---------------';echo 'INIT DEPLOY ->';VBoxManage import /home/trevi/VirtualBox\ VMs/OVAs/CentOS8.ova --vsys 0 --memory 1024 --cpus 2 > /home/trevi/VirtualBox\ VMs/OVAs/deploy-logs | grep '0%';echo '<- END DEPLOY'
       register: deploycentos
 
     - debug: var=deploycentos.stdout_lines
