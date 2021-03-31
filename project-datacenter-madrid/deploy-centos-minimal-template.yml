@@ -1,8 +1,15 @@
 ---
 - hosts: all
   tasks:
+    - name: create-image-centos-minimal
+      shell: echo '---------------';date;hostname;echo '---------------';VBoxManage export CentOS8 -o /home/trevi/VirtualBox\ VMs/OVAs/CentOS8.ova;echo '<- IMAGE CREATED'
+      register: createcentos
+
+    - debug: var=createcentos.stdout_lines
+
     - name: deploy-centos-minimal
-      shell: echo '---------------';date;hostname;echo '---------------';echo 'INIT DEPLOY ->';VBoxManage import /home/trevi/VirtualBox\ VMs/OVAs/CentOS8.ova --vsys 0 --memory 1024 --cpus 2;echo '<- END DEPLOY'
+      shell: echo '---------------';date;hostname;echo '---------------';VBoxManage import /home/trevi/VirtualBox\ VMs/OVAs/CentOS8.ova --vsys 0 --memory 1024 --cpus 2 | grep 'imported';echo '<- DEPLOY FINISHED'
       register: deploycentos
 
     - debug: var=deploycentos.stdout_lines
+
