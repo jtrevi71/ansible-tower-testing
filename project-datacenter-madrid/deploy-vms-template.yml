@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+    - name: create-image-centos-minimal
+      shell: echo '---------------';date;hostname;echo '---------------';VBoxManage export {{vm_name}} -o {{path_image}}{{vm_image}}.ova;echo '<- IMAGE CREATED'
+      register: createcentos
+
+    - debug: var=createcentos.stdout_lines
+
+    - name: deploy-centos-minimal
+      shell: echo '---------------';date;hostname;echo '---------------';VBoxManage import {{path_image}}{{vm_image}}.ova --vsys 0 --memory {{mem_value}} --cpus {{cpu_value}} | grep 'imported';echo '<- DEPLOY FINISHED'
+      register: deploycentos
+
+    - debug: var=deploycentos.stdout_lines
+
