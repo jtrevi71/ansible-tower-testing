@@ -21,7 +21,7 @@
     - debug: var=deployvm.stdout_lines
 
     - name: start-vm
-      shell: echo '---------------';date;echo '---------------';VBoxManage startvm {{vm_name}} --type headless;echo '<< '{{vm_name}}'IS RUNNING >>'
+      shell: echo '---------------';date;echo '---------------';VBoxManage startvm {{vm_name}} --type headless;echo '<< '{{vm_name}}' IS RUNNING >>'
       register: startvm
 
     - debug: var=startvm.stdout_lines
