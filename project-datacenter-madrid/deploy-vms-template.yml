@@ -3,7 +3,7 @@
   tasks:
     
     - name: stop-vm
-      shell: echo '---------------';date;echo '---------------';VBoxManage controlvm {{vm_name}} poweroff;echo '<< '{{vm_name}}' STOPED >>'
+      shell: echo '---------------';date;echo '---------------';VBoxManage controlvm {{vm_name}} poweroff;echo '<< '{{vm_name}}' IS STOPPED >>'
       register: stopvm
     
     - debug: var=stopvm.stdout_lines
