@@ -3,25 +3,25 @@
   tasks:
     
     - name: stop-vm
-      shell: echo '---------------';date;echo '---------------';for k in {{vm_name}};do VBoxManage controlvm {${k}} poweroff;done;echo '<< VM IS STOPPED >>'
+      shell: echo '---------------';date;echo '---------------';for k in {{vm_name}};do VBoxManage controlvm {${k}} poweroff done;echo '<< VM IS STOPPED >>'
       register: stopvm
     
     - debug: var=stopvm.stdout_lines
 
     - name: create-image-vm
-      shell: echo '---------------';date;echo '---------------';for k in {{vm_name}};do VBoxManage export {${k}} -o {{path_image}}{${k}}.ova;done;echo '<< IMAGE CREATED >>'
+      shell: echo '---------------';date;echo '---------------';for k in {{vm_name}};do VBoxManage export {${k}} -o {{path_image}}{${k}}.ova done;echo '<< IMAGE CREATED >>'
       register: createimage
 
     - debug: var=createimage.stdout_lines
 
     - name: deploy-vm
-      shell: echo '---------------';date;echo '---------------';for k in {{vm_name}};do VBoxManage import {{path_image}}{${k}}.ova --vsys 0 --memory {{mem_value}} --cpus {{cpu_value};done;echo '<< DEPLOY FINISHED >>'
+      shell: echo '---------------';date;echo '---------------';for k in {{vm_name}};do VBoxManage import {{path_image}}{${k}}.ova --vsys 0 --memory {{mem_value}} --cpus {{cpu_value} done;echo '<< DEPLOY FINISHED >>'
       register: deployvm
 
     - debug: var=deployvm.stdout_lines
 
     - name: start-vm
-      shell: echo '---------------';date;echo '---------------';for k in {{vm_name}};do VBoxManage startvm {${k}} --type headless;done;echo '<< IS RUNNING >>'
+      shell: echo '---------------';date;echo '---------------';for k in {{vm_name}};do VBoxManage startvm {${k}} --type headless done;echo '<< VM IS RUNNING >>'
       register: startvm
 
     - debug: var=startvm.stdout_lines
