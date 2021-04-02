@@ -2,10 +2,14 @@
 - hosts: all
   tasks:
     
+    - name: stop-vm-init-time
+      shell: echo '---------------';date;echo '---------------'
+      register: stopvminit
+    - debug: var=stopvminit.stdout_lines
+
     - name: stop-vm
-      shell: echo '---------------';date;echo '---------------';for k in {{vm_name}};do VBoxManage controlvm {${k}} poweroff done;echo '<< VM IS STOPPED >>'
+      shell: for k in {{vm_name}};do VBoxManage controlvm {${k}} poweroff done && echo '<< VM IS STOPPED >>'
       register: stopvm
-    
     - debug: var=stopvm.stdout_lines
 
     - name: create-image-vm
