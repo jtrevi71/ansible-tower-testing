@@ -1,0 +1,27 @@
+---
+- hosts: all
+  tasks:
+    
+    - name: stop-vm
+      shell: for k in {{vm_name};do echo '---------------';date;echo '---------------';VBoxManage controlvm {{k}} poweroff;echo '<< '{{k}}' IS STOPPED >>';done
+      register: stopvm
+    
+    - debug: var=stopvm.stdout_lines
+
+    - name: create-image-vm
+      shell: for k in {{vm_name}};do echo '---------------';date;echo '---------------';VBoxManage export {{k}} -o {{path_image}}{{k}}.ova;echo '<< IMAGE CREATED >>';done
+      register: createimage
+
+    - debug: var=createimage.stdout_lines
+
+    - name: deploy-vm
+      shell: for k in {{vm_name}};do echo '---------------';date;echo '---------------';VBoxManage import {{path_image}}{{k}}.ova --vsys 0 --memory {{mem_value}} --cpus {{cpu_value}} | grep 'imported';echo '<< DEPLOY FINISHED >>';done
+      register: deployvm
+
+    - debug: var=deployvm.stdout_lines
+
+    - name: start-vm
+      shell: for k in {{vm_name}};do echo '---------------';date;echo '---------------';VBoxManage startvm {{k}} --type headless;echo '<< '{{k}}' IS RUNNING >>';done
+      register: startvm
+
+    - debug: var=startvm.stdout_lines
