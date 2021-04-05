@@ -1,15 +1,15 @@
 ---
 - hosts: all
   tasks:
-    
-    - name: stop-vm
-      command: VBoxManage controlvm {{ item }} poweroff
+ 
+     - name: stop-vm
+       command: VBoxManage controlvm "{{ item }}" poweroff
+ 
+     - name: create-image-vm
+       command: VBoxManage export "{{ item }}" -o {{path_image}}"{{ item }}".ova
 
-    - name: create-image-vm
-      command: VBoxManage export {{ item }} -o {{path_image}}{{ item }}.ova
-
-    - name: deploy-vm
-      command: VBoxManage import {{path_image}}{{ item }}.ova --vsys 0 --memory {{mem_value}} --cpus {{cpu_value}}
-
-    - name: start-vm
-      command: VBoxManage startvm {{ item }} --type headless
+     - name: deploy-vm
+       command: VBoxManage import {{path_image}}"{{ item }}".ova --vsys 0 --memory {{mem_value}} --cpus {{cpu_value}}
+ 
+     - name: start-vm
+       command: VBoxManage startvm "{{ item }}" --type headless
