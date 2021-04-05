@@ -3,7 +3,7 @@
   hosts: all
   tasks: 
     - 
-        stop-vms: {% for vm in vms_names %} {{VBoxManage controlvm {{ vm }} poweroff}} {% endfor %}
+        stop-vms: "{% for vm in vms_names %} {{VBoxManage controlvm {{ vm }} poweroff}} {% endfor %}"
 
              
 
