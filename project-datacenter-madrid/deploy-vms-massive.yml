@@ -3,9 +3,10 @@
   tasks:
     
     - name: stop-vm
-      shell: VBoxManage controlvm {{vms}} poweroff;echo '<< '{{vms}}' IS STOPPED >>'
-      register: stopvm
-    
+            shell: VBoxManage controlvm {{vms}} poweroff;echo '<< '{{vms}}' IS STOPPED >>'
+            register: stopvm
+    - var:
+            vms: all      
     - debug: var=stopvm.stdout_lines
 
       # - name: create-image-vm
