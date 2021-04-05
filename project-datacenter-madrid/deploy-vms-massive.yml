@@ -3,7 +3,5 @@
   tasks:
     - name: massive-operations
       shell: VBoxManage controlvm "{{ item }}" poweroff
-      register: massive-opperatons
-    - with_items:
-          - CentOS_8_template
-          - rhel_8_ansible
+      register: massiveopp
+    - debug: var=masiveopp.stdout.lines
