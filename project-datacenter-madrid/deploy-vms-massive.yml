@@ -3,7 +3,7 @@
   tasks:
     
     - name: stop-vm
-            shell: VBoxManage controlvm {{vms}} poweroff
+            shell: VBoxManage controlvm "{{vms}}" poweroff
             register: stopvm
     - var:
             vms: all      
