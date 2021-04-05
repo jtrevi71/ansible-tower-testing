@@ -2,12 +2,10 @@
 - hosts: all
   tasks:
     
-    - name: stop-vm
-      script: 
-         - for vm in ${vms_names} ; do      
-           "VBoxManage controlvm $vm poweroff"
-           done
-    
+    - name: stop-vms
+      shell: for vm in ${vms_names}; do VBoxManage controlvm $vm poweroff;done
+      register: stopvms
+    - debug: var=stopvms.stdout_lines
 
     - name: create-image-vm
       shell: echo '---------------';date;echo '---------------';VBoxManage export {{vm_name}} -o {{path_image}}{{vm_name}}.ova;echo '<< IMAGE CREATED >>'
