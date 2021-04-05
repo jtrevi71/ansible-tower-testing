@@ -3,25 +3,13 @@
   tasks:
     
     - name: stop-vm
-      shell: echo '---------------';date;echo '---------------';VBoxManage controlvm "{{ item }}" poweroff;echo '<< '"{{ item }}"' IS STOPPED >>'
-      register: stopvm
-    
-    - debug: var=stopvm.stdout_lines
+      command: VBoxManage controlvm {{ item }} poweroff
 
     - name: create-image-vm
-      shell: echo '---------------';date;echo '---------------';VBoxManage export "{{ item }}" -o {{path_image}}"{{ item }}".ova;echo '<< IMAGE CREATED >>'
-      register: createimage
-
-    - debug: var=createimage.stdout_lines
+      command: VBoxManage export {{ item }} -o {{path_image}}{{ item }}.ova
 
     - name: deploy-vm
-      shell: echo '---------------';date;echo '---------------';VBoxManage import {{path_image}}"{{ item }}".ova --vsys 0 --memory {{mem_value}} --cpus {{cpu_value}} | grep 'imported';echo '<< DEPLOY FINISHED >>'
-      register: deployvm
-
-    - debug: var=deployvm.stdout_lines
+      command: VBoxManage import {{path_image}}{{ item }}.ova --vsys 0 --memory {{mem_value}} --cpus {{cpu_value}}
 
     - name: start-vm
-      shell: echo '---------------';date;echo '---------------';VBoxManage startvm "{{ item }}" --type headless;echo '<< '"{{ item }}"' IS RUNNING >>'
-      register: startvm
-
-    - debug: var=startvm.stdout_lines
+      command: VBoxManage startvm {{ item }} --type headless
