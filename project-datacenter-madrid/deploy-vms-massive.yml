@@ -2,7 +2,8 @@
 - hosts: all
   tasks:
     - name: massive-operations
-      command: VBoxManage controlvm "{{ item }}" poweroff;VBoxManage export "{{ item }}" -o {{path_image}}"{{ item }}".ova;VBoxManage import {{path_image}}"{{ item }}".ova --vsys 0 --memory {{mem_value}} --cpus {{cpu_value}};VBoxManage startvm "{{ item }}" --type headless
+      shell: VBoxManage controlvm "{{ item }}" poweroff
+      register: massive-opperatons
     - with_items:
           - CentOS_8_template
           - rhel_8_ansible
