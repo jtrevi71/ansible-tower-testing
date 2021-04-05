@@ -1,5 +1,10 @@
 ---
-- hosts: all
-  tasks:
-      - name: shutdown-vms
-      - shell: {% for vm in vms_names %} echo {{ vm }}; {% endfor %}
+vlans:
+  10: internal
+  20: client
+  30: internet
+
+{% for vlan_id, name in vlans.items() %}
+     vlan {{ vlan_id }}
+     name {{ name }}
+{% endfor %}
