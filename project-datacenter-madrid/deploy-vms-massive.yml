@@ -1,6 +1,6 @@
 ---
 - hosts: all
   tasks:
-     "{% for vm in vms_names %}
-      echo {{ vm }};
-     {% endfor %}"
+     {% for vm in vms_names() -%}
+      echo "{{ vm }}"
+     {% endfor -%}"
