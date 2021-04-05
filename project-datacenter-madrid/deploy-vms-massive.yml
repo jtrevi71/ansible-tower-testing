@@ -3,7 +3,7 @@
   tasks:
     
     - name: stop-vm
-            shell: VBoxManage controlvm {{vms}} poweroff;echo '<< ''{{vms}}'' IS STOPPED >>'
+            shell: VBoxManage controlvm {{vms}} poweroff
             register: stopvm
     - var:
             vms: all      
