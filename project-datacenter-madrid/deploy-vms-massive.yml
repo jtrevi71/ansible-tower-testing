@@ -4,4 +4,4 @@
     - name: massive-operations
       shell: VBoxManage controlvm "{{ item }}" poweroff
       register: massiveopp
-    - debug: var=masiveopp.stdout.lines
+    - debug: var=masiveopp.stdout_lines
