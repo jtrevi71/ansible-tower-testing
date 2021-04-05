@@ -3,7 +3,7 @@
   tasks:
     
     - name: stop-vms
-      shell: for vm in {{vms_names}};do VBoxManage controlvm {{vm[vm_names]}} poweroff;done
+      shell: for vm in {{vms_names}};do VBoxManage controlvm {${vm}} poweroff;done
       register: stopvms
     - debug: var=stopvms.stdout_lines
 
