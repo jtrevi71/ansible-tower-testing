@@ -5,7 +5,7 @@
     - name: stop-vm
       shell: 
          - echo '---------------';date;echo '---------------'
-         - [for i in {{vm_name}};
+         - [for i in vm_name;
             do
             VBoxManage controlvm {${i}} poweroff;echo '<< '{${i}}' IS STOPPED >>'
             done]
