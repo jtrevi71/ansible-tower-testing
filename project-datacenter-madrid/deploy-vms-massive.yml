@@ -1,5 +1,5 @@
 ---
 - hosts: all
-  - tasks:
+  tasks:
       - name: shutdown-vms
-          - shell: {% for vm in vms_names %} echo {{ vm }}; {% endfor %}
+      - shell: {% for vm in vms_names %} echo {{ vm }}; {% endfor %}
