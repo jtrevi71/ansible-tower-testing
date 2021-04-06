@@ -1,11 +1,9 @@
 ---
 - hosts: all
   tasks:
-    
-    - name: stop-vms
-       shell: "VBoxManage controlvm {{ item }} poweroff"
-       with_items: "{{vmachines}}"
-       register: stop-vms
+   - name: stop-vms
+     shell: VBoxManage controlvm {{ item.name }} poweroff
+     register: stop-vms
        
       # - name: create-image-vm
       #shell: echo '---------------';date;echo '---------------';VBoxManage export {{vm_name}} -o {{path_image}}{{vm_name}}.ova;echo '<< IMAGE CREATED >>'
