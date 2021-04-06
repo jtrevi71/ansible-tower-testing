@@ -3,10 +3,8 @@
   tasks:
     
     - name: stop-vm
-      debug:
-        msg: "VBoxManage controlvm "{{ item.name }}" poweroff"
-       loop:
-          "{{ vmachines }}"     
+       shell: VBoxManage controlvm {{ item.name }} poweroff
+       loop: "{{ vmachines }}"     
        
       # - name: create-image-vm
       #shell: echo '---------------';date;echo '---------------';VBoxManage export {{vm_name}} -o {{path_image}}{{vm_name}}.ova;echo '<< IMAGE CREATED >>'
