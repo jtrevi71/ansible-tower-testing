@@ -2,7 +2,7 @@
 - hosts: all
   tasks:
     - name: stop-vmachines
-      shell: VBoxManage controlvm {{ item }} poweroff
+      shell: VBoxManage controlvm {{ vmname }} poweroff
       register: stopvmachines
 
     - debug: var=stopvmachines.stdout_lines 
