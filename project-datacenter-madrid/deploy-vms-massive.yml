@@ -5,10 +5,9 @@
   - name: stop vms
     # shell: VBoxManage controlvm {{ item.vmname }} poweroff
     #register: vmachines
-    -debug: msg="{{ item.vmname }} IS STTOPED" 
-     ignore_errors: true
+    -debug: msg={{ item.vmname }} IS STTOPED 
      with_subelements:
-             - "{{ vmachines }}"     
+             - vmachines     
              - hardware
 
 
