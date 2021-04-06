@@ -2,10 +2,11 @@
 - hosts: all
   tasks:
          
-  - name: stop vms
-    # shell: VBoxManage controlvm {{ item.vmname }} poweroff
-    #register: vmachines
-  - debug: msg={{ item.vmname }} IS STTOPED 
+  - name: virtual machines stop
+    shell: VBoxManage controlvm {{ item.vmname }} poweroff
+    register: stopvmachines
+
+  - debug: var=stopvmachines.stdout_lines 
 ...
       # - name: create-image-vm
       #shell: echo '---------------';date;echo '---------------';VBoxManage export {{vm_name}} -o {{path_image}}{{vm_name}}.ova;echo '<< IMAGE CREATED >>'
