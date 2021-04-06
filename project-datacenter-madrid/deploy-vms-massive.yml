@@ -1,12 +1,11 @@
 ---
 - hosts: all
   tasks:
-         
-  - name: virtual machines stop
-    shell: VBoxManage controlvm {{ item.vmname }} poweroff
-    register: stopvmachines
+    - name: stop-vmachines
+      shell: VBoxManage controlvm {{ item }} poweroff
+      register: stopvmachines
 
-  - debug: var=stopvmachines.stdout_lines 
+    - debug: var=stopvmachines.stdout_lines 
 ...
       # - name: create-image-vm
       #shell: echo '---------------';date;echo '---------------';VBoxManage export {{vm_name}} -o {{path_image}}{{vm_name}}.ova;echo '<< IMAGE CREATED >>'
