@@ -6,13 +6,7 @@
     # shell: VBoxManage controlvm {{ item.vmname }} poweroff
     #register: vmachines
     -debug: msg={{ item.vmname }} IS STTOPED 
-     with_subelements:
-             - vmachines     
-             - hardware
-
-
-
-
+...
       # - name: create-image-vm
       #shell: echo '---------------';date;echo '---------------';VBoxManage export {{vm_name}} -o {{path_image}}{{vm_name}}.ova;echo '<< IMAGE CREATED >>'
       #register: createimage
