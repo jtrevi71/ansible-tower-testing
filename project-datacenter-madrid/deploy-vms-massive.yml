@@ -3,7 +3,7 @@
   tasks:
     
     - name: stop-vm
-       shell: VBoxManage controlvm "{{ item.name }}" poweroff
+       shell: "VBoxManage controlvm {{ item.name }} poweroff"
        with_items:
          - "{{ vmachines }}"     
        
