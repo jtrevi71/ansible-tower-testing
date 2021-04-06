@@ -7,18 +7,6 @@
     with_subelements:
       - vmachines
       - hardware  
-
-   -vars:    
-    vmachines:
-      - vmname: CentOS_8_template
-        hardware:
-           - cpu: 1
-             ram: 2048
-
-      - vmname: rhel_8_ansible
-        hardware:
-           - cpu: 2
-             ram: 1024     
 ...                  
 
 
