@@ -3,11 +3,14 @@
   tasks:
          
   - name: stop vms
-    shell: VBoxManage controlvm {{ item.vmname }} poweroff
-    with_subelements:
-      - vmachines
-      - hardware  
-...                  
+    # shell: VBoxManage controlvm {{ item.vmname }} poweroff
+    #register: vmachines
+    -debug: msg="{{ item.vmname }} IS STTOPED" 
+     ignore_errors: true
+     with_subelements:
+             - "{{ vmachines }}"     
+             - hardware
+
 
 
 
