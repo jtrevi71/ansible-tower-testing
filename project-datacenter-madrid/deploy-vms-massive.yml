@@ -2,7 +2,7 @@
 - hosts: all
   tasks:
    - name: stop-vms
-     shell: VBoxManage controlvm {{ item.name }} poweroff
+     shell: VBoxManage controlvm "{{ item.name }}" poweroff
      register: stop-vms
        
       # - name: create-image-vm
