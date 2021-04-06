@@ -2,8 +2,11 @@
 - hosts: all
   tasks:
    - name: stop-vms
-     shell: VBoxManage controlvm "{{ item.name }}" poweroff
-     register: stop-vms
+     service: VBoxManage
+     command: controlvm name={{item}} state=poweroff
+     with_items:
+             - CentOS_8_template
+             - rhel_8_ansible  
        
       # - name: create-image-vm
       #shell: echo '---------------';date;echo '---------------';VBoxManage export {{vm_name}} -o {{path_image}}{{vm_name}}.ova;echo '<< IMAGE CREATED >>'
