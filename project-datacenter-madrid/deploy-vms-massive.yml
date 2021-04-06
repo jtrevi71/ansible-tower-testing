@@ -3,25 +3,25 @@
   tasks:
     
     - name: stop-vm
-      shell: echo '---------------';date;echo '---------------';VBoxManage controlvm {{vm_name}} poweroff;echo '<< '{{vm_name}}' IS STOPPED >>'
-      register: stopvm
-    
-    - debug: var=stopvm.stdout_lines
+      debug:
+        msg: "VBoxManage controlvm "{{ item.name }}" poweroff"
+       loop:
+          "{{ vmachines }}"     
+       
+      # - name: create-image-vm
+      #shell: echo '---------------';date;echo '---------------';VBoxManage export {{vm_name}} -o {{path_image}}{{vm_name}}.ova;echo '<< IMAGE CREATED >>'
+      #register: createimage
 
-    - name: create-image-vm
-      shell: echo '---------------';date;echo '---------------';VBoxManage export {{vm_name}} -o {{path_image}}{{vm_name}}.ova;echo '<< IMAGE CREATED >>'
-      register: createimage
+      # - debug: var=createimage.stdout_lines
 
-    - debug: var=createimage.stdout_lines
+      # - name: deploy-vm
+      #shell: echo '---------------';date;echo '---------------';VBoxManage import {{path_image}}{{vm_name}}.ova --vsys 0 --memory {{mem_value}} --cpus {{cpu_value}} | grep 'imported';echo '<< DEPLOY FINISHED >>'
+      # register: deployvm
 
-    - name: deploy-vm
-      shell: echo '---------------';date;echo '---------------';VBoxManage import {{path_image}}{{vm_name}}.ova --vsys 0 --memory {{mem_value}} --cpus {{cpu_value}} | grep 'imported';echo '<< DEPLOY FINISHED >>'
-      register: deployvm
+      # - debug: var=deployvm.stdout_lines
 
-    - debug: var=deployvm.stdout_lines
+      # - name: start-vm
+      #shell: echo '---------------';date;echo '---------------';VBoxManage startvm {{vm_name}} --type headless;echo '<< '{{vm_name}}' IS RUNNING >>'
+      #register: startvm
 
-    - name: start-vm
-      shell: echo '---------------';date;echo '---------------';VBoxManage startvm {{vm_name}} --type headless;echo '<< '{{vm_name}}' IS RUNNING >>'
-      register: startvm
-
-    - debug: var=startvm.stdout_lines
+      # - debug: var=startvm.stdout_lines
