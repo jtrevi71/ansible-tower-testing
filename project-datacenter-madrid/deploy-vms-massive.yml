@@ -1,11 +1,13 @@
 ---
-- name: stop vms
-  hosts: all
+- hosts: all
   tasks:
-     VBoxManage: "{{item.command}} {{item.name}} {{item.state}}"
+         
+  - name: stop vms
+     VBoxManage: "{{item.command}} {{item.vmname}} {{item.state}}"
      with_items:
-             - { command: 'controlvm', name: 'CentOS_8_template', state: 'poweroff' }
-             - { command: 'controlvm', name: 'CentOS_8_template', state: 'poweroff' }
+             - { command: 'controlvm', vmname: 'CentOS_8_template', state: 'poweroff' }
+             - { command: 'controlvm', vmname: 'CentOS_8_template', state: 'poweroff' }
+...  
       # - name: create-image-vm
       #shell: echo '---------------';date;echo '---------------';VBoxManage export {{vm_name}} -o {{path_image}}{{vm_name}}.ova;echo '<< IMAGE CREATED >>'
       #register: createimage
